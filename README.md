@@ -12,25 +12,18 @@ Static website for New Era Studios: an AI-native creative studio for series slat
 
 No build step. Open `index.html` in a browser or serve the folder with any static host.
 
-## Videos (hosted on Bunny.net)
+## Videos (hosted on Bunny Stream)
 
-Video files are **not** stored in this repository (see `.gitignore`). The pages expect them at these paths:
+All videos stream from Bunny Stream library `715659` via its CDN host
+`https://vz-382c5475-4dd.b-cdn.net/<video-id>/play_<720|1080>p.mp4`.
 
-```
-videos/hero.mp4                  home hero + Porsche panel
-videos/viking.mp4                portfolio panel
-videos/zara-commercial.mp4       portfolio panel
-videos/hm.mp4                    portfolio panel
-videos/*-30.mp4                  30-second silent loops (Signals tiles, Projects grid)
-videos/burning-car.mp4           Projects page closing banner
-videos/contact-banner.mp4        Contact page background
-videos/cta-logo.mp4              3D logo loop (currently unused)
-videos/full/*.mp4                full-length versions with audio (Projects page player)
-```
+- Full-screen backgrounds and the full-length player use `play_1080p.mp4`.
+- Grid and Signals tiles use `play_720p.mp4`.
+- Poster images (`videos/posters/*.jpg`) live in this repository.
 
-Upload the local `videos/` folder to a Bunny Storage Zone with the **same folder structure**, then point the `videos/...` paths in the three HTML files at the Bunny CDN (Pull Zone) URL.
-
-Poster images (`videos/posters/*.jpg`) are small and live in this repository.
+**Allowed domains:** the Bunny library blocks requests from unlisted websites (403).
+Add every domain the site runs on (e.g. `newerastudioswebsite.vercel.app` and any custom domain)
+under Bunny → Stream → library → Security → Allowed Domains.
 
 ## Libraries (loaded from CDNs)
 
