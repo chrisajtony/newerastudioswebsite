@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact · New Era Studios</title>
+<meta name="description" content="Start a project with New Era Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#000;--fg:#f2f0ed;--accent:#ed1e26;
+  --font:"Familjen Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --gutter:clamp(16px, 3.2vw, 48px);
+  --ease:cubic-bezier(.77,0,.18,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--accent);font-family:var(--font);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;min-height:100svh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+/* header (same as home) */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:calc(26px + env(safe-area-inset-top,0px)) var(--gutter) 18px;pointer-events:none}
+.site-header>*{pointer-events:auto}
+.logo svg{width:52px;height:36px;display:block}
+.nav{display:flex;gap:16px}
+.nav a{display:flex;align-items:center;justify-content:space-between;gap:16px;width:clamp(150px, 14.8vw, 296px);padding:5px 10px;border:1.5px solid var(--accent);color:var(--accent);font-size:13px;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;transition:background .3s,color .3s}
+.nav a svg{width:11px;height:11px}
+.nav a:hover,.nav a[aria-current="page"]{background:var(--accent);color:#fff}
+@media (max-width:760px){.nav a{width:auto;min-width:0;font-size:11px;gap:10px;padding:4px 8px} .nav{gap:6px} .logo svg{width:40px;height:28px}}
+
+/* stage */
+.contact{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;isolation:isolate}
+.bg-video{position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% 50%;pointer-events:none}
+.contact::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.68) 38%, rgba(0,0,0,0) 66%)}
+.copy{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(150px, 20vh, 230px) var(--gutter) calc(clamp(28px, 4vh, 44px) + env(safe-area-inset-bottom,0px))}
+h1{margin:0;font-size:clamp(36px, 3.6vw, 68px);font-weight:400;letter-spacing:-.035em;line-height:1.08}
+.cta{display:flex;flex-direction:column;align-items:flex-start;gap:26px}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-width:clamp(180px, 13.8vw, 276px);padding:4px 8px 4px 14px;background:var(--accent);border:1.5px solid var(--accent);color:#fff;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;position:relative;isolation:isolate;overflow:hidden}
+.btn svg{width:10px;height:10px}
+.btn::before{content:"";position:absolute;inset:0;background:#fff;transform:translateY(101%);transition:transform .3s cubic-bezier(.645,.045,.355,1);z-index:-1}
+.btn:hover{color:var(--accent)}
+.btn:hover::before{transform:none}
+.info{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(22px, 3.4vh, 36px);font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;line-height:1.5}
+.info a{display:flex;justify-content:space-between;align-items:center;gap:18px;width:max-content;min-width:200px}
+.info a svg{width:9px;height:9px}
+.info a:hover{color:#fff}
+.info .pair{display:flex;flex-direction:column}
+.email{user-select:all}
+@media (max-width:760px){
+  .contact::after{background:linear-gradient(180deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.35) 40%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.85) 100%)}
+  .copy{padding-top:130px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html" aria-label="New Era Studios home">
+    <svg viewBox="0 0 40 28" aria-hidden="true"><path fill="#ed1e26" d="M14 0h26L30 12H4zM10 16h26L26 28H0z"/></svg>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="work.html">Projects<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a href="contact.html" aria-current="page">Contact<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </nav>
+</header>
+
+<main class="contact">
+  <video class="bg-video" id="bgVideo" autoplay muted loop playsinline preload="auto" src="videos/contact-banner.mp4" aria-hidden="true"></video>
+  <div class="copy">
+    <div class="cta">
+      <h1>The best projects start<br>with a good conversation.</h1>
+      <a class="btn" href="mailto:chris@newerasstudios.com">Let's talk<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
+    <ul class="info">
+      <li><a href="mailto:chris@newerasstudios.com"><span class="email">chris@newerasstudios.com</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></li>
+      <li class="pair"><span>Los Angeles, CA</span><span>By appointment</span></li>
+      <li class="pair">
+        <a href="https://www.linkedin.com/company/new-era-studios-inc/" target="_blank" rel="noopener">LinkedIn<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a href="https://www.instagram.com/newerasstudio/" target="_blank" rel="noopener">Instagram<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      </li>
+    </ul>
+  </div>
+</main>
+
+<script>
+(function(){
+  /* always open pages at the top (no restored or remembered scroll position) */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  window.addEventListener('load', function(){ window.scrollTo(0, 0); });
+  window.addEventListener('pageshow', function(e){ if (e.persisted) window.scrollTo(0, 0); });
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bg = document.getElementById('bgVideo');
+  bg.addEventListener('error', function(){ bg.style.display = 'none'; });
+  if (reduce) { bg.removeAttribute('autoplay'); bg.pause(); }
+})();
+</script>
+</body>
+</html>

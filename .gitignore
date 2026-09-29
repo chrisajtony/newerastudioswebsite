@@ -1,0 +1,18 @@
+# Video files are hosted on Bunny.net, not in this repository
+*.mov
+*.MOV
+*.mp4
+*.MP4
+*.m4v
+
+# Source/working files kept locally only
+site.html
+site.v*.bak.html
+ChatGPT Image*.png
+Viking.jpeg
+.t.html
+.wt.html
+.pt.html
+
+# macOS
+.DS_Store
