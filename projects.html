@@ -366,6 +366,12 @@ section.home-projects{position:relative;z-index:2;margin-top:-100vh;margin-top:-
 .site-header.scrolled .logo .logo-wm{clip-path:inset(0 0 0 0)}
 
 .work-hero{padding:clamp(150px, 20vh, 220px) var(--gutter) clamp(24px, 3vw, 36px);color:#fff}
+/* 3D logo loop behind the header: sized to the section's height (absolute, so the section keeps its height) */
+.work-hero{position:relative;overflow:hidden;isolation:isolate}
+.work-hero>*:not(.hero-video){position:relative;z-index:1}
+.hero-video{position:absolute;z-index:0;top:0;right:0;height:100%;width:auto;aspect-ratio:16/9;max-width:none;object-fit:cover;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 30%);mask-image:linear-gradient(90deg, transparent 0%, #000 30%)}
+@media (max-width:760px){.hero-video{height:auto;width:100%;top:auto;bottom:0;opacity:.55;-webkit-mask-image:none;mask-image:none}}
 .work-title{margin:16px 0 clamp(28px, 3.4vw, 44px);font-size:clamp(34px, 3.6vw, 64px);font-weight:500;letter-spacing:-.035em;line-height:1}
 .filters{display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));gap:clamp(8px, .8vw, 12px)}
 .filter{appearance:none;background:transparent;border:1.5px solid #fff;color:#fff;font:inherit;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:4px 8px;cursor:pointer;transition:background .3s,color .3s}
@@ -430,6 +436,7 @@ section.work-cta{padding:0}
 
 <main id="top">
   <section class="work-hero" aria-labelledby="workTitle">
+    <video class="hero-video" id="workHeroVideo" autoplay muted loop playsinline preload="auto" src="https://vz-382c5475-4dd.b-cdn.net/9b386b77-4090-4e70-b283-fdcea9ed1202/play_720p.mp4" aria-hidden="true"></video>
     <span class="tag"><span class="tag-icon" aria-hidden="true">✱</span>Work</span>
     <h1 class="work-title" id="workTitle">Our Portfolio</h1>
     <div class="filters" role="group" aria-label="Filter projects">
@@ -641,6 +648,11 @@ section.work-cta{padding:0}
     buildFx();
     addEventListener('load', function(){ ScrollTrigger.refresh(); });
   }
+
+  /* header logo loop */
+  var heroVideo = document.getElementById('workHeroVideo');
+  heroVideo.addEventListener('error', function(){ heroVideo.style.display = 'none'; });
+  if (reduce) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
 
   /* play only the tiles on screen */
   var vids = document.querySelectorAll('.pt-video');
