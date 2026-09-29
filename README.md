@@ -7,8 +7,8 @@ Static website for New Era Studios: an AI-native creative studio for series slat
 | File | Page |
 |---|---|
 | `index.html` | Home: scroll intro, portfolio panels, services, clients, process, signals, footer |
-| `work.html` | Projects index: filterable grid, full-length video player |
-| `contact.html` | Contact page |
+| `projects.html` (`/projects`) | Projects index: filterable grid, full-length video player |
+| `contact.html` (`/contact`) | Contact page |
 
 No build step. Open `index.html` in a browser or serve the folder with any static host.
 
