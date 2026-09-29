@@ -378,7 +378,8 @@ section.pt-grid{padding:0;}
 .pt.full{grid-column:1 / -1;height:100vh;height:100svh}
 .pt.is-hidden{display:none}
 .pt.fading{opacity:0}
-.pt-parallax{position:absolute;left:0;right:0;top:-12%;height:124%;will-change:transform}
+.pt-parallax{position:absolute;left:0;right:0;top:-18%;height:136%;will-change:transform;transform-origin:50% 50%}
+.pt{will-change:clip-path}
 .pt-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .pt-video.lb{transform:scale(1.34)}
 .pt-open{position:absolute;inset:0;z-index:2;background:transparent;border:0;padding:0;cursor:pointer}
@@ -604,6 +605,29 @@ section.work-cta{padding:0}
   }
   layout();
 
+  /* parallax transitions between videos:
+     each frame opens from its bottom edge, the footage eases out of a zoom as it rises in,
+     and drifts slower than the page. In a side-by-side pair the right tile drifts faster. */
+  var fx = [];
+  function buildFx(){
+    fx.forEach(function(tw){ if (tw.scrollTrigger) tw.scrollTrigger.kill(); tw.kill(); });
+    fx = [];
+    var vis = tiles.filter(function(t){ return !t.classList.contains('is-hidden'); }), pairPos = 0;
+    vis.forEach(function(t){
+      var media = t.querySelector('.pt-parallax'), full = t.classList.contains('full');
+      var right = !full && (pairPos++ % 2 === 1);
+      if (full) pairPos = 0;
+      var drift = right ? 13 : 9;
+      gsap.set([t, media], { clearProps: 'clipPath,transform' });
+      fx.push(gsap.fromTo(media, { yPercent: -drift }, { yPercent: drift, ease: 'none',
+        scrollTrigger: { trigger: t, start: 'top bottom', end: 'bottom top', scrub: true } }));
+      fx.push(gsap.fromTo(media, { scale: 1.18 }, { scale: 1, ease: 'none', immediateRender: true,
+        scrollTrigger: { trigger: t, start: 'top bottom', end: 'top 20%', scrub: true } }));
+      fx.push(gsap.fromTo(t, { clipPath: 'inset(16% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none',
+        scrollTrigger: { trigger: t, start: 'top bottom', end: 'top 40%', scrub: true } }));
+    });
+  }
+
   /* smooth scroll + parallax inside each tile */
   var useGsap = !reduce && !!(window.gsap && window.ScrollTrigger), lenis = null;
   if (useGsap) {
@@ -614,10 +638,7 @@ section.work-cta{padding:0}
       gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
       gsap.ticker.lagSmoothing(0);
     }
-    tiles.forEach(function(t){
-      gsap.fromTo(t.querySelector('.pt-parallax'), { yPercent: -8 }, { yPercent: 8, ease: 'none',
-        scrollTrigger: { trigger: t, start: 'top bottom', end: 'bottom top', scrub: true } });
-    });
+    buildFx();
     addEventListener('load', function(){ ScrollTrigger.refresh(); });
   }
 
@@ -640,7 +661,7 @@ section.work-cta{padding:0}
       setTimeout(function(){
         tiles.forEach(function(t){ t.classList.toggle('is-hidden', cat !== 'all' && t.dataset.cat !== cat); });
         layout();
-        if (useGsap) ScrollTrigger.refresh();
+        if (useGsap) { buildFx(); ScrollTrigger.refresh(); }
         requestAnimationFrame(function(){ tiles.forEach(function(t){ t.classList.remove('fading'); }); });
       }, 300);
     });
